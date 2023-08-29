@@ -13,4 +13,4 @@ mkdir -p logs
 filtlong --min_length 1000 --keep_percent 95 "$1" > reads.fq
 
 # Next run the trycycler tool subsample to split the reads.fastq
-trycycler subsample --reads reads.fq --out_dir read_subsets
+trycycler subsample --reads reads.fq --out_dir read_subsets > logs/subsample.log
