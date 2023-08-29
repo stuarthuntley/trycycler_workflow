@@ -5,6 +5,9 @@
 
 # It takes one positional argument: read file location
 
+# Adjust workspace landscape for saving log data of workflow
+mkdir -p logs
+
 # Use filtlong to remove very poor and short (< 1kb) reads from
 # raw read file and save output as reads.fq in working dir.
 filtlong --min_length 1000 --keep_percent 95 "$1" > reads.fq
