@@ -20,6 +20,7 @@ fi
 read_file="${1:?Missing raw read file}"
 
 # Adjust workspace landscape for saving log data of workflow
+threads=4 # this may not be necessary, read splitting option may use multiple threads
 mkdir -p logs
 
 # Use the filtlong script read_info_histograms.sh to investigate the
