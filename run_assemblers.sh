@@ -5,7 +5,8 @@
 
 # Adjust workspace landscape
 threads=4
-mkdir assemblies
+mkdir -p assemblies
+mkdir -p logs # this should already exist
 
 # run the three assemblers sequentially on the sample files
 flye --nano-hq read_subsets/sample_01.fastq --threads "$threads" --out-dir assembly_01 && cp assembly_01/assembly.fasta assemblies/assembly_01.fasta && cp assembly_01/assembly_graph.gfa assemblies/assembly_01.gfa && rm -r assembly_01
