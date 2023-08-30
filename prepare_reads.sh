@@ -24,11 +24,11 @@ mkdir -p logs
 
 # Use filtlong to remove very poor quality and short (< 1kb) reads
 # from raw read file and save output as reads.fq in working dir.
-echo "filtlong --min_length 1000 --keep_percent 95 $read_file > reads.fq" > logs/filtlong.log
+echo "** filtlong --min_length 1000 --keep_percent 95 $read_file > reads.fq **" > logs/filtlong.log
 
 script -a logs/filtlong.log -c "filtlong --min_length 1000 --keep_percent 95 '$read_file' > reads.fq"
 
 # Next run the trycycler tool subsample to split the reads.fastq
-echo "trycycler subsample --reads reads.fq --out_dir read_subsets" > logs/subsample.log
+echo "** trycycler subsample --reads reads.fq --out_dir read_subsets **" > logs/subsample.log
 
 trycycler subsample --reads reads.fq --out_dir read_subsets >> logs/subsample.log
