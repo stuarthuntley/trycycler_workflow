@@ -40,3 +40,7 @@ read_info_histograms.sh reads.fq > logs/filtered_read_analysis.log
 echo "** trycycler subsample --reads reads.fq --out_dir read_subsets **" > logs/subsample.log
 
 trycycler subsample --reads reads.fq --out_dir read_subsets >> logs/subsample.log
+
+# No more use for the subread sets, so will delete
+# (commenting out for now during debugging)
+#rm -r read_subsets 
