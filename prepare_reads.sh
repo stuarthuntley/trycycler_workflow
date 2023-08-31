@@ -20,31 +20,31 @@ fi
 read_file="${1:?Missing raw read file}"
 
 # Adjust workspace landscape for saving log data of workflow
-echo "** threads=4 **"
+echo -e "\n\n** threads=4 **\n\n"
 threads=4 # this may not be necessary, read splitting option may use multiple threads
-echo "** mkdir -p logs **"
+echo -e "\n\n** mkdir -p logs **\n\n"
 mkdir -p logs
 
 # Use the filtlong script read_info_histograms.sh to investigate the
 # state of the raw read file
-echo "** read_info_histograms.sh $read_file > logs/raw_read_analysis.log **"
+echo -e"\n\n** read_info_histograms.sh $read_file > logs/raw_read_analysis.log **\n\n"
 read_info_histograms.sh "$read_file" > logs/raw_read_analysis.log
 
 # Use filtlong to remove very poor quality and short (< 1kb) reads
 # from raw read file and save output as reads.fq in working dir
-echo "** filtlong --min_length 1000 --keep_percent 95 $read_file > reads.fq **"
-echo "** filtlong --min_length 1000 --keep_percent 95 $read_file > reads.fq **" > logs/filtlong.log
+echo -e "\n\n** filtlong --min_length 1000 --keep_percent 95 $read_file > reads.fq **\n\n"
+echo -e "** filtlong --min_length 1000 --keep_percent 95 $read_file > reads.fq **\n\n" > logs/filtlong.log
 filtlong --min_length 1000 --keep_percent 95 "$read_file" > reads.fq 2> filtlong.tmp
 perl fix_filtlong_log.pl >> logs/filtlong.log
 rm filtlong.tmp
 
 # Use read_info_histograms.sh again on the filtered reads
-echo "** read_info_histograms.sh reads.fq > logs/filtered_read_analysis.log **"
+echo -e "\n\n** read_info_histograms.sh reads.fq > logs/filtered_read_analysis.log **\n\n"
 read_info_histograms.sh reads.fq > logs/filtered_read_analysis.log
 
 # Next run the trycycler tool subsample to split the reads.fastq
-echo "** trycycler subsample --reads reads.fq --out_dir read_subsets **"
-echo "** trycycler subsample --reads reads.fq --out_dir read_subsets **" > logs/subsample.log
+echo -e "\n\n** trycycler subsample --reads reads.fq --out_dir read_subsets **\n\n"
+echo -e "** trycycler subsample --reads reads.fq --out_dir read_subsets **\n\n" > logs/subsample.log
 trycycler subsample --reads reads.fq --out_dir read_subsets >> logs/subsample.log 2>&1
 
 # No more use for the subread sets, so will delete
