@@ -35,8 +35,8 @@ read_info_histograms.sh "$read_file" > logs/raw_read_analysis.log
 echo -e "\n\n** filtlong --min_length 1000 --keep_percent 95 $read_file > reads.fq **\n\n"
 echo -e "** filtlong --min_length 1000 --keep_percent 95 $read_file > reads.fq **\n\n" > logs/filtlong.log
 filtlong --min_length 1000 --keep_percent 95 "$read_file" > reads.fq 2> filtlong.tmp
+echo -e "\n\n** perl fix_filtlong_log.pl >> logs/filtlong.log **\n\n"
 perl fix_filtlong_log.pl >> logs/filtlong.log
-rm filtlong.tmp
 
 # Use read_info_histograms.sh again on the filtered reads
 echo -e "\n\n** read_info_histograms.sh reads.fq > logs/filtered_read_analysis.log **\n\n"
@@ -47,6 +47,7 @@ echo -e "\n\n** trycycler subsample --reads reads.fq --out_dir read_subsets **\n
 echo -e "** trycycler subsample --reads reads.fq --out_dir read_subsets **\n\n" > logs/subsample.log
 trycycler subsample --reads reads.fq --out_dir read_subsets >> logs/subsample.log 2>&1
 
-# No more use for the subread sets, so will delete
+# Delete temporary data folders
 # (commenting out for now during debugging)
-#rm -r read_subsets 
+#rm -r read_subsets
+#rm filtlong.tmp
