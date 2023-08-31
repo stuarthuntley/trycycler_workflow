@@ -34,9 +34,9 @@ read_info_histograms.sh "$read_file" > logs/raw_read_analysis.log
 # from raw read file and save output as reads.fq in working dir
 echo "** filtlong --min_length 1000 --keep_percent 95 $read_file > reads.fq"
 echo "** filtlong --min_length 1000 --keep_percent 95 $read_file > reads.fq **" > logs/filtlong.log
-
-echo "** filtlong --min_length 1000 --keep_percent 95 $read_file"
-filtlong --min_length 1000 --keep_percent 95 "$read_file" > reads.fq 2> filtlong.log
+filtlong --min_length 1000 --keep_percent 95 "$read_file" > reads.fq 2> filtlong.tmp
+perl fix_filtlong_log.pl >> logs/filtlong.log
+rm filtlong.tmp
 
 # Use read_info_histograms.sh again on the filtered reads
 echo "** read_info_histograms.sh reads.fq > logs/filtered_read_analysis.log"
